@@ -1,0 +1,42 @@
+@extends('administrator::layouts.template')
+
+@section('content')
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{ $config['title'] }}</h3>
+    </div>
+    <div class="box-body table-responsive">
+        @if( Session::has('message') )
+        <div class="block-messages">
+            @include('scaffolding::messages')
+        </div>
+        @endif
+        {!! Form::open(['url' => "/scaffolding/{$model}/save", 'files' => true]) !!}
+        <form method="" class="form-horizontal clearfix">
+            @foreach( $form as $key => $element )
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">{{ $element['label'] }}</label>
+                    <div class="col-lg-10">
+                        {!! WebForm::element($key, $element)->make($row) !!}
+                    </div>
+               </div>
+            </div>
+            @endforeach
+            <div class="col-lg-12">
+                <div class="text-right">
+                    <div class="btn-group">
+                        <a href="{{ url('/scaffolding') }}/{{$model}}" class="btn btn-danger">
+                            <i class="fa fa-remove"></i> Cancel
+                        </a>
+                        <button class="btn btn-success">
+                            <i class="fa fa-check"></i> Save
+                        </button>
+                    </div>
+                </div>
+                {!! Form::hidden('id', $row->id) !!}
+           </div>
+        {!! Form::close() !!}
+    </div>
+</div>
+@stop

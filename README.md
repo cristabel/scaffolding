@@ -1,2 +1,2 @@
 # scaffolding
-Scaffolding
+Generate Scaffolding
